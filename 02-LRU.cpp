@@ -9,35 +9,14 @@
 #include <vector>
 #include <list>
 
+
+
 using std::cout;
 using std::endl;
 using std::list;
 using std::vector;
 using std::map;
 typedef vector<int> vi;
-
-class Solution {
-public:
-  /**
-   * lru design
-   * @param operators int整型vector<vector<>> the ops
-   * @param k int整型 the k
-   * @return int整型vector
-   */
-  vector<int> LRU(vector<vector<int> >& operators, int k) {
-    // write code here
-    lru V(k);
-    vi o;                       //<! the output.
-    for (vi r : operators)     // for each request
-      {
-        if (r[0] == 1)
-          V.set(r[1],r[2]);
-        else
-          o.push_back(V.get(r[1]));
-      }
-    return o;
-  }
-};
 
 /**
  * @brief the lru cache object
@@ -64,7 +43,7 @@ public:
    */
   void set(int k, int v){
     // If k already exits
-    map::iterator i = m.find(k);
+    map<int,int>::iterator i = m.find(k);
     if (i != m.end()){
       // change value
       i->second = v;
@@ -86,7 +65,7 @@ public:
   }
 
   int get(int k){
-    map::iterator i = m.find();
+    map<int,int>::iterator i = m.find(k);
     if (i == m.end()){
       return -1;
     }else{
@@ -94,5 +73,33 @@ public:
       return i->second;
     }
   }
-}
+};
 
+class Solution {
+public:
+  /**
+   * lru design
+   * @param operators int整型vector<vector<>> the ops
+   * @param k int整型 the k
+   * @return int整型vector
+   */
+  vector<int> LRU(vector<vector<int> >& operators, int k) {
+    // write code here
+    lru V(k);
+    vi o;                       //<! the output.
+    for (vi r : operators)     // for each request
+      {
+        if (r[0] == 1)
+          V.set(r[1],r[2]);
+        else
+          o.push_back(V.get(r[1]));
+      }
+    return o;
+  }
+};
+
+
+int main(int argc, char *argv[]){
+  
+  return 0;
+  }
