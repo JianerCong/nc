@@ -16,6 +16,7 @@ using std::endl;
 using std::list;
 using std::vector;
 using std::map;
+using std::ostream;
 typedef vector<int> vi;
 
 /**
@@ -25,7 +26,8 @@ class lru {
 public:
   map<int,int> m;               //<! the container.
   list<int> l;                  //<! the queue of key to remove
-  int size = 0;                 //<! the size of array
+  const int size = 0;                 //<! the size of array
+
   lru(int s): size(s) {};
   void prioritize(int k){
     l.remove(k); l.push_back(k);
@@ -35,45 +37,31 @@ public:
     l.push_back(k);
   }
 
+  friend ostream& operator<<(ostream & os , lru o);
+
   /**
    * @brief insert a key-value pair.
    *
    * @param k key
    * @param v value
    */
-  void set(int k, int v){
-    // If k already exits
-    map<int,int>::iterator i = m.find(k);
-    if (i != m.end()){
-      // change value
-      i->second = v;
-      // Prioritize this key
-      prioritize(k);
-    }else{
-      // need to push k into map
-      if (m.size() == size){
-        // need to pop something
-        m.erase(l.front());
-        l.pop_front();
-        add(k,v);
-      }else{
-        // map not full, new key.
-        add(k,v);
-        size++;
-      }
-    }
-  }
+  void set(int k, int v);
 
   int get(int k){
+    cout << "Getting value for key " << k << endl;
     map<int,int>::iterator i = m.find(k);
     if (i == m.end()){
+      cout << "\tKey not foundn 🙉";
       return -1;
     }else{
+      cout << "\tKey found:+1: to be " << i->second << endl;
       prioritize(i->first);
       return i->second;
     }
   }
 };
+
+#include "02-LRU-i.cpp"
 
 class Solution {
 public:
@@ -99,7 +87,3 @@ public:
 };
 
 
-int main(int argc, char *argv[]){
-  
-  return 0;
-  }
