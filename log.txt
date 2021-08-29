@@ -1,51 +1,5 @@
-Setting value for 1 : 10
-	Key dosn't exits. Add new value.	Stack not full, add it directly.
-Now this is a size 3 LRU Cache:
-	 stored map:
-k : 1 : 10
-	 stored vector:
-1 
-Setting value for 2 : 20
-	Key dosn't exits. Add new value.	Stack not full, add it directly.
-Now this is a size 3 LRU Cache:
-	 stored map:
-k : 1 : 10
-k : 2 : 20
-	 stored vector:
-1 2 
-Setting value for 3 : 30
-	Key dosn't exits. Add new value.	Stack not full, add it directly.
-Now this is a size 3 LRU Cache:
-	 stored map:
-k : 1 : 10
-k : 2 : 20
-k : 3 : 30
-	 stored vector:
-1 2 3 
-Setting value for 4 : 40
-	Key dosn't exits. Add new value.	Cache is full. Remove 1
-Now this is a size 3 LRU Cache:
-	 stored map:
-k : 2 : 20
-k : 3 : 30
-k : 4 : 40
-	 stored vector:
-2 3 4 
-Getting value for key 4
-	Key found:+1: to be 40
-Now this is a size 3 LRU Cache:
-	 stored map:
-k : 2 : 20
-k : 3 : 30
-k : 4 : 40
-	 stored vector:
-2 3 4 
-Getting value for key 2
-	Key found:+1: to be 20
-Now this is a size 3 LRU Cache:
-	 stored map:
-k : 2 : 20
-k : 3 : 30
-k : 4 : 40
-	 stored vector:
-3 4 2 
+In file included from 05-t.cpp:7:
+05-2find.cpp: In static member function ‘static int Solution::search(const std::vector<int>&, int)’:
+05-2find.cpp:41:23: warning: narrowing conversion of ‘((& nums)->std::vector<int>::size() - 1)’ from ‘std::vector<int>::size_type’ {aka ‘long unsigned int’} to ‘int’ [-Wnarrowing]
+   41 |     int h{ nums.size()-1};                  // lower and higher boundaries
+      |            ~~~~~~~~~~~^~

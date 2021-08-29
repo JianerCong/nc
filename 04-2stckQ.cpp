@@ -20,18 +20,14 @@ using std::ostream;
 class Solution
 {
 public:
-  friend ostream & operator<<(ostream & os, Solution s);
+  friend ostream & operator<<(ostream & os, Solution & s);
   /**
    * @brief Enqueue an item.
    * @param node the item to be added.
    */
   void push(int node) {
-    if (in1){
       cout << "Pushing to stack 1\n";
       stack1.push(node);
-    }else{
-      stack2.push(node);
-    }
   }
 
   /**
@@ -39,10 +35,10 @@ public:
    */
   int pop() {
     cout << "Need to pop from s2: ";
-    if (stack2.empty){
+    if (stack2.empty()){
       cout << "s2 empty, pour s1 to s2 before pop\n";
 
-      while (!stack1.empty){
+      while (!stack1.empty()){
         stack2.push(stack1.top());
         stack1.pop();
       }
@@ -52,6 +48,7 @@ public:
     }
     int r = stack2.top();
     stack2.pop();
+    cout << "Value poped is : " << r << endl;
     return r;
   }
 
@@ -61,18 +58,23 @@ private:
 };
 
 
+// Display a stack
+template <typename Stack>
+void print(Stack stack /* pass by value */, int id)
+{
+  std::cout << "stack" << id << " [" << stack.size() << "]: ";
+  for (; !stack.empty(); stack.pop())
+    std::cout << stack.top() << ' ';
+  std::cout << (id > 1 ? "\n\n" : "\n");
+}
 
-ostream & operator<<(ostream & os, Solution s)
+
+ostream & operator<<(ostream & os, Solution & s)
 {
   cout << "The Current state:\n";
-  cout << "Stack 1: ";
-  for (auto x : s.stack1)
-    cout << x << " ";
-  cout << endl;
-  cout << "Stack 2: ";
-  for (x : s.stack2)
-    cout << x << " ";
-  cout << endl;
+  print(s.stack1,1);
+  print(s.stack2,2);
 
   return os;
 }
+
